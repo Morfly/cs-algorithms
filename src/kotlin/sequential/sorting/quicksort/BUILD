@@ -10,6 +10,6 @@ kt_jvm_binary(
     ],
     main_class = "sequential.sorting.quicksort.QuickSortKt",
     deps = [
-        "//src/kotlin/_util:utils",
+        "//_util:utils",
     ]
 )

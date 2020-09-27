@@ -1,6 +1,6 @@
 load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
 
-package(default_visibility = ["//src/kotlin:__subpackages__"])
+package(default_visibility = ["//:__subprojects__])
 
 
 kt_jvm_library(
