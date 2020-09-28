@@ -1,4 +1,4 @@
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "define_kt_toolchain")
+load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "define_kt_toolchain", "kt_jvm_library")
 
 JVM_VERSION = "1.6"
 
@@ -9,4 +9,14 @@ define_kt_toolchain(
     api_version = KOTLIN_VERSION,
     jvm_target = JVM_VERSION,
     language_version = KOTLIN_VERSION,
+)
+
+kt_jvm_library(
+    name = "utils",
+    srcs = [
+        "_util/Utils.kt",
+        "//sequential/shuffling/fisheryates:FisherYatesShuffle.kt",
+
+    ],
+    visibility = ["//:__subpackages__"]
 )
