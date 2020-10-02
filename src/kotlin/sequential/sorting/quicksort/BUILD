@@ -8,8 +8,8 @@ kt_jvm_library(
     ] + glob(["partition/*.kt"]),
     deps = [
         "//sequential/sorting/insertionsort:insertion_sort_lib",
-        "//sequential/sorting/_measurement",
-        "//:utils"
+        "//sequential/sorting/_measurement:measurement",
+        "//:utils",
     ]
 )
 
