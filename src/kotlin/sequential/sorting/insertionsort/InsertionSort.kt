@@ -1,6 +1,6 @@
 package sequential.sorting.insertionsort
 
-import sequential.sorting._utils.exch
+import _util.*
 
 
 fun IntArray.insertionSort() {
@@ -29,5 +29,11 @@ fun IntArray.insertionSort() {
 
 
 fun main() {
-    println("InsertionSort")
+    val array = randomIntArray(size = 20)
+    array.print()
+
+    array.insertionSort()
+
+    println("Sorting is successful: ${array.isSorted()}")
+    array.print()
 }

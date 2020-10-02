@@ -1,6 +1,6 @@
 package sequential.sorting.quicksort.partition
 
-import sequential.sorting._utils.exch
+import _util.exch
 
 
 /**

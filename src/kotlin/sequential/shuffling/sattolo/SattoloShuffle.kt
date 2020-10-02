@@ -1,17 +1,24 @@
 package sequential.shuffling.sattolo
 
-import sequential.sorting._util.swap
+import _util.*
 import kotlin.random.Random
 
 
 fun IntArray.sattoloShuffle() {
     for (i in lastIndex downTo 1) {
         val j = Random.nextInt(i)
-        swap(i, j)
+        exch(i, j)
     }
 }
 
 
 fun main() {
-    println("SattoloShuffle")
+    val array = randomIntArray(20)
+    array.sort()
+    array.print()
+
+    array.sattoloShuffle()
+
+    println("Shuffling is successful: ${!array.isSorted()}")
+    array.print()
 }

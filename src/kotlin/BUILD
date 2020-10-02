@@ -14,9 +14,9 @@ define_kt_toolchain(
 kt_jvm_library(
     name = "utils",
     srcs = [
-        "_util/Utils.kt",
+        "_util/IntArrayUtils.kt",
+        "_util/CollectionUtils.kt",
         "//sequential/shuffling/fisheryates:FisherYatesShuffle.kt",
-
     ],
     visibility = ["//:__subpackages__"]
 )

@@ -1,16 +1,15 @@
 package sequential.sorting.quicksort
 
-import sequential.sorting.insertionsort.ranged.insertionSort
+import sequential.sorting.insertionsort.insertionSort
 import sequential.sorting.quicksort.partition.lomutoPartition
 import sequential.sorting.quicksort.partition.hoarePartition
-import _util.shuffle
+import _util.*
 
 
 /**
- * Minimum threshold for which quick sort algorithm will be applied. Otherwise, insertion sort will be used.
+ * Minimum threshold for which quick sort algorithm should be applied. Otherwise, insertion sort is used.
  */
 private const val INSERTION_SORT_THRESHOLD = 47
-
 
 /**
  * In-place quick sort for the given array.
@@ -21,13 +20,10 @@ fun IntArray.quickSort() {
 }
 
 /**
- * In-place quick sort for the given range.
+ * In-place quick sort for the given range in array.
  *
- * It is possible to partition an array by the following algorithms:
- * [hoarePartition], [lomutoPartition].
- *
- * @param start start of the sorting range inclusive.
- * @param end end of the sorting range exclusive.
+ * @param start inclusive.
+ * @param end exclusive.
  */
 private fun IntArray.quickSort(start: Int, end: Int) {
     if (end - start < 2) return
@@ -42,16 +38,20 @@ private fun IntArray.quickSort(start: Int, end: Int) {
     quickSort(pivot + 1, end)
 }
 
-
 /**
- * Currently selected partitioning algorithm which is used in [quickSort].
- * Can be [lomutoPartition] or [hoarePartition].
+ * Partitioning function for the [quickSort].
+ * Can be [lomutoPartition] or [hoarePartition] algorithms.
  */
-var partition: PartitioningFunction = IntArray::hoarePartition
-
-typealias PartitioningFunction = IntArray.(start: Int, end: Int) -> Int
+var partition: IntArray.(start: Int, end: Int) -> Int = IntArray::hoarePartition
 
 
 fun main() {
-    println("QuickSort")
+    val array = randomIntArray(size = 20)
+    array.print()
+
+    partition = IntArray::lomutoPartition
+    array.quickSort()
+
+    println("Sorting is successful: ${array.isSorted()}")
+    array.print()
 }

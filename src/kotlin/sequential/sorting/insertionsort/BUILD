@@ -4,9 +4,12 @@ kt_jvm_library(
     name = "insertion_sort_lib",
     srcs = [
         "InsertionSort.kt",
-        "ranged/InsertionSort.kt",
+        "RangedInsertionSort.kt",
     ],
-    deps = ["//sequential/sorting/_analysis:sort_analysis"],
+    deps = [
+        "//sequential/sorting/_measurement",
+        "//:utils",
+    ],
     visibility = ["//visibility:public"],
 )
 
@@ -18,6 +21,6 @@ java_binary(
 
 java_binary(
     name = "insertion_sort_ranged",
-    main_class = "sequential.sorting.insertionsort.ranged.InsertionSortKt",
+    main_class = "sequential.sorting.insertionsort.RangedInsertionSortKt",
     runtime_deps = [":insertion_sort_lib"],
 )
