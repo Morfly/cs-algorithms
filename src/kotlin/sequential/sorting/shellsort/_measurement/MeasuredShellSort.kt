@@ -1,9 +1,7 @@
 package sequential.sorting.shellsort._measurement
 
-import _util.isSorted
-import _util.print
-import _util.randomIntArray
-import sequential.sorting._measurement.measured
+import _util.*
+import sequential.sorting._measurement.*
 import sequential.sorting.shellsort.gapsequence.ShellGapSequence
 
 

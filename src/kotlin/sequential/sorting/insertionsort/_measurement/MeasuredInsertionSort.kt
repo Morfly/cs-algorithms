@@ -1,7 +1,7 @@
 package sequential.sorting.insertionsort._measurement
 
-import sequential.sorting._measurement.*
 import _util.*
+import sequential.sorting._measurement.*
 
 
 fun IntArray.insertionSort() = measured {

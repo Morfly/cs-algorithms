@@ -1,9 +1,6 @@
 package sequential.sorting.quicksort
 
-import _util.isSorted
-import _util.print
-import _util.randomIntArray
-import _util.shuffle
+import _util.*
 import sequential.sorting.insertionsort.ranged.insertionSort
 import sequential.sorting.quicksort.partition.hoarePartition
 import sequential.sorting.quicksort.partition.lomutoPartition

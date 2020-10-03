@@ -1,9 +1,6 @@
 package sequential.sorting.bubblesort.ranged
 
-import _util.exch
-import _util.isSorted
-import _util.print
-import _util.randomIntArray
+import _util.*
 
 
 fun IntArray.bubbleSort(start: Int, end: Int) {

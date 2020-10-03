@@ -1,8 +1,6 @@
 package sequential.sorting.shellsort
 
-import _util.isSorted
-import _util.print
-import _util.randomIntArray
+import _util.*
 import sequential.sorting.shellsort.gapsequence.ShellGapSequence
 
 
