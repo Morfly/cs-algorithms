@@ -1,0 +1,40 @@
+package sequential.graph.bfs;
+
+import java.util.ArrayDeque;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+
+
+public class BreadthFirstTraversal {
+
+    public static <T> Collection<T> bfs(Map<T, List<T>> graph, T root) {
+        var explored = new LinkedHashSet<T>();
+        var searchQueue = new ArrayDeque<T>();
+
+        searchQueue.add(root);
+        while (!searchQueue.isEmpty()) {
+            var node = searchQueue.removeFirst();
+            if (!explored.contains(node)) {
+                explored.add(node);
+                searchQueue.addAll(graph.getOrDefault(node, List.of()));
+            }
+        }
+        return explored;
+    }
+
+
+    public static void main(String[] args) {
+        var graph = Map.of(
+                "you", List.of("alice", "bob", "clair"),
+                "alice", List.of("peggy"),
+                "clair", List.of("thom", "jonny"),
+                "bob", List.of("anuj", "paggy")
+        );
+
+        System.out.println(
+                bfs(graph, "you")
+        );
+    }
+}
