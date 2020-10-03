@@ -19,7 +19,7 @@ abstract class MeasuredCollection<T : Comparable<T>> {
 
     fun exch(i: Int, j: Int) {
         exchanges++
-        this[i] = this[j].also { this[j] = this[i] }
+        this[i, false] = this[j].also { this[j, false] = this[i] }
     }
     
     fun onCompare() {
@@ -27,7 +27,11 @@ abstract class MeasuredCollection<T : Comparable<T>> {
     }
 
     operator fun set(index: Int, value: MeasuredElement<T>) {
-        halfExchanges++
+        this[index, true] = value
+    }
+
+    operator fun set(index: Int, registerHalfExch: Boolean, value: MeasuredElement<T>) {
+        if (registerHalfExch) halfExchanges++
         setAt(index, value)
     }
 
