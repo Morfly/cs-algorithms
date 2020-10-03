@@ -1,4 +1,4 @@
-package sequential.sorting.quicksort
+package sequential.sorting.quicksort.functional
 
 import _util.*
 

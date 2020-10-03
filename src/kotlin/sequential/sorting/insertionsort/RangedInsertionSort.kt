@@ -1,4 +1,4 @@
-package sequential.sorting.insertionsort
+package sequential.sorting.insertionsort.ranged
 
 import _util.*
 
