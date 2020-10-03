@@ -23,7 +23,7 @@ func dfs<T>(in graph: Graph<T>, withRoot root: T) -> [T] {
 }
 
 
-func dfsMain() {
+func mainDfs() {
     let graph = [
         "you": ["alice", "bob", "clair"],
         "alice": ["peggy"],

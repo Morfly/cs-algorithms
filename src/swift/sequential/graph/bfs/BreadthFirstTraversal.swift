@@ -23,7 +23,7 @@ func bfs<T>(in graph: Graph<T>, withRoot root: T) -> [T] {
 }
 
 
-func bfsMain() {
+func mainBfs() {
     let graph = [
         "you": ["alice", "bob", "clair"],
         "alice": ["peggy"],
