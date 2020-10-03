@@ -19,33 +19,41 @@ private val INFINITY = Double.POSITIVE_INFINITY
 fun <T> Graph<T>.dijkstra(root: T, target: T): Collection<T> {
     val graph = this
 
-    val costs = graph.getValue(root).toMutableMap()
+    val costs = graph[root].orEmpty().toMutableMap()
     val explored = mutableSetOf<T>()
-    val parents = graph.getValue(root).mapValues { root }.toMutableMap()
+    val parents = graph[root].orEmpty().mapValues { root }.toMutableMap()
 
-    var node = costs.smallestCostNode(explored)
+    var node = costs.minCostNode(explored)
     while (node != null) {
         val nodeCost = costs[node]!!
-        val successors = graph[node].orEmpty()
 
+        val successors = graph[node].orEmpty()
         for ((succ, edgeWeight) in successors) {
             if (nodeCost + edgeWeight < costs[succ] ?: INFINITY) {
                 costs[succ] = nodeCost + edgeWeight
                 parents[succ] = node
             }
         }
-
-        explored.add(node)
-        node = costs.smallestCostNode(explored)
+        explored += node
+        node = costs.minCostNode(explored)
     }
 
     return pathToNode(target, parents)
 }
 
-private fun <T> Map<T, Double>.smallestCostNode(explored: Collection<T>): T? = asSequence()
-        .filter { (node, _) -> node !in explored }
-        .minBy { (_, cost) -> cost }
-        ?.key
+private fun <T> Map<T, Double>.minCostNode(explored: Collection<T>): T? {
+    val costs = this
+
+    var minCostNode: T? = null
+    var minCost = INFINITY
+    for ((node, cost) in costs) {
+        if (node !in explored && cost < minCost) {
+            minCostNode = node
+            minCost = cost
+        }
+    }
+    return minCostNode
+}
 
 /**
  * Build path from root to target node.
@@ -56,7 +64,7 @@ private fun <T> pathToNode(target: T, parents: Map<T, T>): List<T> {
     val path = mutableListOf<T>()
     var node: T? = target
     while (node != null) {
-        path.add(node)
+        path += node
         node = parents[node]
     }
     return path.reversed()
@@ -64,15 +72,14 @@ private fun <T> pathToNode(target: T, parents: Map<T, T>): List<T> {
 
 
 fun main() {
-
     val waypoints: Graph<String> = mapOf(
-            "Start" to mapOf("A" to 5.0),
-            "A" to mapOf("B" to 4.0, "C" to 7.0),
-            "B" to mapOf("Finish" to 4.0),
-            "C" to mapOf("Finish" to 3.0)
+        "Start" to mapOf("A" to 5.0),
+        "A" to mapOf("B" to 7.0, "C" to 4.0),
+        "B" to mapOf("Finish" to 4.0),
+        "C" to mapOf("Finish" to 3.0)
     )
 
     println(
-            waypoints.dijkstra("Start", "Finish")
+        waypoints.dijkstra("Start", "Finish")
     )
 }

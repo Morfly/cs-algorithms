@@ -7,9 +7,9 @@ import kotlin.random.Random
 private const val MAX_ARRAY_VALUE = 999
 private const val ARRAY_SIZE = 50
 
-fun randomIntArray(size: Int = ARRAY_SIZE, range: IntRange = 0..MAX_ARRAY_VALUE) = 
-    IntArray(size) { 
-        Random.nextInt(range.first, range.last + 1) 
+fun randomIntArray(size: Int = ARRAY_SIZE, range: IntRange = 0..MAX_ARRAY_VALUE) =
+    IntArray(size) {
+        Random.nextInt(range.first, range.last + 1)
     }
 
 fun IntArray.shuffle() {

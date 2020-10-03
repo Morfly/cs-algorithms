@@ -11,17 +11,15 @@ private typealias Queue<T> = ArrayDeque<T>
 fun <T> Graph<T>.bfs(root: T): Collection<T> {
     val graph = this
 
-    val explored = mutableSetOf<T>()
+    val explored = linkedSetOf<T>()
     val searchQueue = Queue<T>()
 
-    searchQueue.addLast(root)
+    searchQueue += root
     while (searchQueue.isNotEmpty()) {
         val node = searchQueue.removeFirst()
-        explored.add(node)
-
-        val successors = graph[node].orEmpty()
-        for (succ in successors) {
-            if (succ !in explored) searchQueue.addLast(succ)
+        if (node !in explored) {
+            explored += node
+            searchQueue += graph[node].orEmpty()
         }
     }
 
@@ -30,5 +28,14 @@ fun <T> Graph<T>.bfs(root: T): Collection<T> {
 
 
 fun main() {
-    // TODO
+    val socialNetwork: Graph<String> = mapOf(
+        "you" to listOf("tony", "steve", "nick"),
+        "tony" to listOf("clint"),
+        "nick" to listOf("thor", "natasha"),
+        "steve" to listOf("phil", "clint")
+    )
+
+    println(
+        socialNetwork.bfs("you")
+    )
 }
