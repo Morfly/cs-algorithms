@@ -10,8 +10,8 @@ import java.util.Map;
 public class IterativeDepthFirstTraversal {
 
     public static <T> Collection<T> dfs(Map<T, List<T>> graph, T root) {
-        var searchStack = new ArrayDeque<T>();
         var explored = new LinkedHashSet<T>();
+        var searchStack = new ArrayDeque<T>();
 
         searchStack.add(root);
         while (!searchStack.isEmpty()) {
