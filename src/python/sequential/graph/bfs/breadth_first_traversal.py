@@ -32,6 +32,5 @@ def main():
         bfs(graph, "you")
     )
 
-
 if __name__ == "__main__":
     main()

@@ -27,9 +27,7 @@ def main():
         "bob": ["anuj", "peggy"],
     }
 
-    print(
-        dfs(graph, "you")
-    )
+    print(dfs(graph, "you"))
 
 if __name__ == "__main__":
     main()
