@@ -1,12 +1,12 @@
-package sequential.sorting.selectionsort
+package sequential.sorting.selectionsort._measurement
 
-import _util.exch
 import _util.isSorted
 import _util.print
 import _util.randomIntArray
+import sequential.sorting._measurement.measured
 
 
-fun IntArray.selectionSort() {
+fun IntArray.selectionSort() = measured {
     for (i in 0..lastIndex) {
         var minIndex = i
         for (j in i + 1..lastIndex)
@@ -21,8 +21,10 @@ fun main() {
     val array = randomIntArray(size = 20)
     array.print()
 
-    array.selectionSort()
+    val measurement = array.selectionSort()
 
     println("Sorting is successful: ${array.isSorted()}")
     array.print()
+
+    println("$measurement")
 }
