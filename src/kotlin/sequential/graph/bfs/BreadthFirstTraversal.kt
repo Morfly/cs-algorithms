@@ -36,6 +36,6 @@ fun main() {
     )
 
     println(
-        socialNetwork.bfs("you")
+        socialNetwork.bfs(root = "you")
     )
 }
