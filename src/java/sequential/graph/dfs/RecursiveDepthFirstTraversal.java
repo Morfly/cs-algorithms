@@ -12,23 +12,30 @@ class RecursiveDepthFirstTraversal<T> {
     private Map<T, List<T>> graph;
     private Set<T> explored;
 
-    public Collection<T> dfs(Map<T, List<T>> graph, T root) {
+    public synchronized Collection<T> dfs(Map<T, List<T>> graph, T root) {
         this.graph = graph;
         explored = new LinkedHashSet<>();
 
-        explore(root);
-
-        return explored;
+        var traversed = explore(root);
+        
+        clear();
+        return traversed;
     }
 
-    private void explore(T node) {
+    private Collection<T> explore(T node) {
         explored.add(node);
 
         var successors = graph.getOrDefault(node, List.of());
         for (var succ : successors)
             if (!explored.contains(succ)) explore(succ);
+        
+        return explored;
     }
 
+    private void clear() {
+        explored = null;
+        graph = null;
+    }
 
     public static void main(String[] args) {
         var graph = Map.of(
