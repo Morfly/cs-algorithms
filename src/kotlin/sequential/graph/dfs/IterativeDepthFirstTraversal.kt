@@ -28,7 +28,7 @@ fun <T> Graph<T>.dfs(root: T): Collection<T> {
 
 
 fun main() {
-    val socialNetwork: Graph<String> = mapOf(
+    val graph: Graph<String> = mapOf(
         "you" to listOf("tony", "steve", "nick"),
         "tony" to listOf("clint"),
         "nick" to listOf("thor", "natasha"),
@@ -36,6 +36,6 @@ fun main() {
     )
 
     println(
-        socialNetwork.dfs(root = "you")
+        graph.dfs(root = "you")
     )
 }

@@ -24,7 +24,6 @@ def dijkstra(graph, root, target):
 
     return build_path_to_node(target, parents)
 
-
 def find_min_cost_node(costs, explored):
     costs = {node: cost for (node, cost) in costs.items() if node not in explored}
     return min(costs, key=costs.get, default=None)
