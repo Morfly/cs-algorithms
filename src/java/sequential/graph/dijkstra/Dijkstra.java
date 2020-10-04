@@ -12,14 +12,14 @@ class Dijkstra<T> {
 
     private static final double INFINITY = Double.POSITIVE_INFINITY;
 
-
+    
     public static <T> List<T> dijkstra(Map<T, Map<T, Double>> graph, T root, T target) {
-        var rootSuccessors = graph.getOrDefault(root, Map.of());
+        if(!graph.containsKey(root)) throw new IllegalArgumentException("Invalid root.");
 
-        var costs = new HashMap<>(rootSuccessors);
+        var costs = new HashMap<>(graph.get(root));
         var explored = new HashSet<T>();
         var parents = new HashMap<T, T>();
-        for (var node : rootSuccessors.keySet())
+        for (var node : graph.get(root).keySet())
             parents.put(node, root);
 
         var node = findMinCostNode(costs, explored);
@@ -56,8 +56,7 @@ class Dijkstra<T> {
     }
 
     private static <T> List<T> buildPathToNode(T target, Map<T, T> parents) {
-        if (!parents.containsKey(target))
-            throw new IllegalArgumentException("Invalid arguments provided.");
+        if (!parents.containsKey(target)) throw new IllegalArgumentException("Invalid target.");
 
         var path = new LinkedList<T>();
         T node = target;

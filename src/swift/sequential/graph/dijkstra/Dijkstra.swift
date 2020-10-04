@@ -1,15 +1,29 @@
+/// Weighted graph representation using dictionary.
 typealias Graph<T: Hashable> = [T: [T: Double]]
 
 
+/// Infinity as a default node cost value.
 let infinity = Double.infinity
 
 
+/**
+ Finds fastest path between specified nodes in the given graph.
+
+ - Parameters:
+    - graph: Given graph.
+    - root: Beginning of the path.
+    - target: End of the path.
+
+ - Returns: Array representing path to the `target` node starting from `root` or `nil` if invalid arguments provided.
+ */
 func dijkstra<T>(in graph: Graph<T>, withRoot root: T, findPathTo target: T) -> [T]? {
-    var costs = graph[root] ?? [:]
+    guard graph[root] != nil else { return nil }
+
+    var costs = graph[root]!
     var explored = Set<T>()
-    var parents = graph[root]?.mapValues { cost in root } ?? [:]
+    var parents = graph[root]!.mapValues { _ in root }
     
-    while let node = findMinCostNode(from: costs, except: explored) {
+    while let node = findMinCostNode(in: costs, except: explored) {
         explored.insert(node)
         let nodeCost = costs[node]!
         
@@ -26,13 +40,34 @@ func dijkstra<T>(in graph: Graph<T>, withRoot root: T, findPathTo target: T) -> 
     return buildPathTo(target, with: parents)
 }
 
-private func findMinCostNode<T>(from costs: [T: Double], except explored: Set<T>) -> T? {
+/**
+ Finds the cheapest node at the given moment.
+ 
+ - Parameters:
+    - costs: Dictionary which contains costs of all nodes at the given moment.
+    - explored: Ignored nodes which are already explored.
+ 
+ - Returns: Min cost node at the given moment or `nil` if all nodes are already explored.
+ */
+private func findMinCostNode<T>(in costs: [T: Double], except explored: Set<T>) -> T? {
     return costs
+        // ignoring already explored nodes.
         .filter { node, cost in !explored.contains(node) }
-        .min { a, b in a.value < b.value}?
+        // finding the min cost node. `value` corresponds to node cost.
+        .min { cost1, cost2 in cost1.value < cost2.value}?
+        // returning node object or `nil` if the node was not found.
         .key
 }
 
+/**
+ Builds a path to the given node starting from root.
+ 
+ - Parameters:
+    - target: Given node which represends the end of the path.
+    - parents: Dictionary which contains parents of all graph nodes.
+ 
+ - Returns: Array representing path to the `target` node starting from `root` or `nil` if invalid arguments provided.
+ */
 private func buildPathTo<T>(_ target: T, with parents: [T: T]) -> [T]? {
     guard parents[target] != nil else { return nil }
     
@@ -47,11 +82,11 @@ private func buildPathTo<T>(_ target: T, with parents: [T: T]) -> [T]? {
 
 
 func mainDijkstra() {
-    let graph: Graph<String> = [
-        "Start": ["A": 5],
-        "A": ["B": 7, "C": 4],
-        "B": ["Finish": 4],
-        "C": ["Finish": 3]
+    let graph = [
+        "Start": ["A": 5.0],
+        "A": ["B": 7.0, "C": 4.0],
+        "B": ["Finish": 4.0],
+        "C": ["Finish": 3.0]
     ]
 
     print(

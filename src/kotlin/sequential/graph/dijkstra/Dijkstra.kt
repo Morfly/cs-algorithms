@@ -18,10 +18,11 @@ private val INFINITY = Double.POSITIVE_INFINITY
  */
 fun <T> Graph<T>.dijkstra(root: T, target: T): Collection<T> {
     val graph = this
+    require(root in graph) { "Invalid root." }
 
-    val costs = graph[root].orEmpty().toMutableMap()
+    val costs = graph[root]!!.toMutableMap()
     val explored = mutableSetOf<T>()
-    val parents = graph[root].orEmpty().mapValues { root }.toMutableMap()
+    val parents = graph[root]!!.mapValues { root }.toMutableMap()
 
     var node = costs.findMinCostNode(explored)
     while (node != null) {
@@ -55,7 +56,7 @@ private fun <T> Map<T, Double>.findMinCostNode(explored: Collection<T>): T? =
  * Build path from root to target node.
  */
 private fun <T> buildPathToNode(target: T, parents: Map<T, T>): List<T> {
-    if (target !in parents) error("Invalid arguments provided.")
+    require(target in parents) { "Invalid target."}
 
     val path = mutableListOf<T>()
     var node: T? = target
@@ -68,7 +69,7 @@ private fun <T> buildPathToNode(target: T, parents: Map<T, T>): List<T> {
 
 
 fun main() {
-    val waypoints: Graph<String> = mapOf(
+    val graph: Graph<String> = mapOf(
         "Start" to mapOf("A" to 5.0),
         "A" to mapOf("B" to 7.0, "C" to 4.0),
         "B" to mapOf("Finish" to 4.0),
@@ -76,6 +77,6 @@ fun main() {
     )
 
     println(
-        waypoints.dijkstra("Start", "Finish")
+        graph.dijkstra("Start", "Finish")
     )
 }
