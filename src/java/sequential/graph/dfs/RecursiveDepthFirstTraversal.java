@@ -17,7 +17,7 @@ class RecursiveDepthFirstTraversal<T> {
         explored = new LinkedHashSet<>();
 
         var traversed = explore(root);
-        
+
         clear();
         return traversed;
     }
@@ -36,6 +36,7 @@ class RecursiveDepthFirstTraversal<T> {
         explored = null;
         graph = null;
     }
+
 
     public static void main(String[] args) {
         var graph = Map.of(

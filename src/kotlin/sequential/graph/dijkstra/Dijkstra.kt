@@ -23,8 +23,9 @@ fun <T> Graph<T>.dijkstra(root: T, target: T): Collection<T> {
     val explored = mutableSetOf<T>()
     val parents = graph[root].orEmpty().mapValues { root }.toMutableMap()
 
-    var node = costs.minCostNode(explored)
+    var node = costs.findMinCostNode(explored)
     while (node != null) {
+        explored += node
         val nodeCost = costs[node]!!
 
         val successors = graph[node].orEmpty()
@@ -34,32 +35,27 @@ fun <T> Graph<T>.dijkstra(root: T, target: T): Collection<T> {
                 parents[succ] = node
             }
         }
-        explored += node
-        node = costs.minCostNode(explored)
+        node = costs.findMinCostNode(explored)
     }
 
-    return pathToNode(target, parents)
+    return buildPathToNode(target, parents)
 }
 
-private fun <T> Map<T, Double>.minCostNode(explored: Collection<T>): T? {
-    val costs = this
-
-    var minCostNode: T? = null
-    var minCost = INFINITY
-    for ((node, cost) in costs) {
-        if (node !in explored && cost < minCost) {
-            minCostNode = node
-            minCost = cost
-        }
-    }
-    return minCostNode
-}
+private fun <T> Map<T, Double>.findMinCostNode(explored: Collection<T>): T? = 
+    // turning costs to sequence to improve performance of further operations.
+    asSequence()
+        // ignoring already explored nodes.
+        .filter { (node, _) -> node !in explored } 
+        // finding the min cost node.
+        .minBy { (_, cost) -> cost} 
+        // returning node object or `null` if the node was not found.
+        ?.key 
 
 /**
  * Build path from root to target node.
  */
-private fun <T> pathToNode(target: T, parents: Map<T, T>): List<T> {
-    if (target !in parents) return emptyList()
+private fun <T> buildPathToNode(target: T, parents: Map<T, T>): List<T> {
+    if (target !in parents) error("Invalid arguments provided.")
 
     val path = mutableListOf<T>()
     var node: T? = target
