@@ -16,26 +16,26 @@ All the links refer to `Kotlin` implementations by default. If you prefer anothe
 `B` - Base, `A` - Advanced
 ### By category
 - **Graph**
-    - `B` [Breadth-First Traversal](src/kotlin/sequential/graph/bfs) - BFS
-    - `B` [Deapth-First Traversal](src/kotlin/sequential/graph/dfs) - DFS, recursive and iterative implementations.
-    - `B` [Topological Sorting](src/kotlin/sequential/graph/topologicalsort) - based on DFS, recursive and iterative implementations.
-    - `B` [Dijkstra's Algorithm](src/kotlin/sequential/graph/dijkstra) - greedy algorithm, finding shortest/fastest path to vertex.
+    - `B` [Breadth-first traversal](src/kotlin/sequential/graph/bfs) - BFS
+    - `B` [Deapth-first traversal](src/kotlin/sequential/graph/dfs) - DFS, recursive and iterative implementations.
+    - `B` [Topological sorting](src/kotlin/sequential/graph/topologicalsort) - based on DFS, recursive and iterative implementations.
+    - `B` [Dijkstra's algorithm](src/kotlin/sequential/graph/dijkstra) - greedy algorithm, finding shortest/fastest path to vertex.
 - **Maze**
     - Generation
         - ...
     - Pathfinding
         - ...
 - **Sorting**
-    - `B` [Selection sort](src/kotlin/sorting/selectionsort)
-    - `B` [Insertion sort](src/kotlin/sorting/insertionsort)
-    - `B`, `A` [Shellsort](src/kotlin/sorting/shellsort) - including 14 gap sequences.
-    - `B` [Merge sort](src/kotlin/sorting/mergesort)
+    - `B` [Selection sort](src/kotlin/sequential/sorting/selectionsort)
+    - `B` [Insertion sort](src/kotlin/sequential/sorting/insertionsort)
+    - `B`, `A` [Shellsort](src/kotlin/sequential/sorting/shellsort) - including 14 gap sequences.
+    - `B` [Merge sort](src/kotlin/sequential/sorting/mergesort)
     - `B` [Quicksort]() - including Lomuto's and Hoare's partition schemes.
-    - `B` [Bubble sort](src/kotlin/sorting/bubblesort)
-    - `B` [Radix sort](src/kotlin/sorting/radixsort)
+    - `B` [Bubble sort](src/kotlin/sequential/sorting/bubblesort)
+    - `B` [Radix sort](src/kotlin/sequential/sorting/radixsort)
 - **Shuffling**
-    - `B` [Fisher-Yates shuffling](src/kotlin/shuffling/fisheryates)
-    - `A` [Sattolo shuffling](src/kotlin/shuffling/sattolo)
+    - `B` [Fisher-Yates shuffling](src/kotlin/sequential/shuffling/fisheryates)
+    - `A` [Sattolo shuffling](src/kotlin/sequential/shuffling/sattolo)
 - ...
 
 ### By design paradigm
