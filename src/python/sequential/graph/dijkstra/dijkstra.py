@@ -16,7 +16,7 @@ def dijkstra(graph, root, target):
 
         successors = graph.get(node, {})
         for (succ, edge_cost) in successors.items():
-            if node_cost + edge_cost < costs.get(succ, infinity):
+            if node_cost + edge_cost < (costs.get(succ) or infinity):
                 costs[succ] = node_cost + edge_cost
                 parents[succ] = node
 
