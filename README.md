@@ -1,7 +1,7 @@
 # Algorithms and Data Structures Encyclopedia
 **Work in progress...**
 
-A encyclopedia of computer science algorithms and data structures.
+An encyclopedia of computer science algorithms and data structures.
 ## Available languages
 - [Java](src/java)
 - [Kotlin](src/kotlin)
@@ -65,20 +65,21 @@ All the links refer to `Kotlin` implementations by default. If you prefer anothe
 algorithms
 └── _tools
 └── src
-    └── java
-    └── kotlіn
-    └── ...
-    └── <language-name>
-        └── _util
-        └── parallel
-        │   └── ...
-        └── sequential
-            └── graph
-            └── sorting
-            └── ...
-            └── <algorithm-category>
-                └── BUILD  <-- build target definition file
-                └── <src-file(s)>
+│   └── java
+│   └── kotlіn
+│   └── ...
+│   └── <language-name>
+│       └── _util
+│       └── parallel
+│       │   └── ...
+│       └── sequential
+│           └── graph
+│           └── sorting
+│           └── ...
+│           └── <algorithm-category>
+│               └── BUILD  <-- build target definition file
+│               └── <src-file(s)>
+└── WORKSPACE
 ```
 ## How to build source code
 All the source code in this project is built with Bazel build system. [Learn more about Bazel...](https://bazel.build/)
