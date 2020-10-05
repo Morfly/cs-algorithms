@@ -7,14 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static java.util.Map.Entry.comparingByValue;
 
-class Dijkstra<T> {
+
+class Dijkstra {
 
     private static final double INFINITY = Double.POSITIVE_INFINITY;
 
-    
+
     public static <T> List<T> dijkstra(Map<T, Map<T, Double>> graph, T root, T target) {
-        if(!graph.containsKey(root)) throw new IllegalArgumentException("Invalid root.");
+        if (!graph.containsKey(root)) throw new IllegalArgumentException("Invalid root.");
 
         var costs = new HashMap<>(graph.get(root));
         var explored = new HashSet<T>();
@@ -43,16 +45,13 @@ class Dijkstra<T> {
     }
 
     private static <T> T findMinCostNode(Map<T, Double> costs, Set<T> explored) {
-        var minCost = INFINITY;
-        T minCostNode = null;
-        for (var node : costs.keySet()) {
-            var cost = costs.get(node);
-            if (!explored.contains(node) && cost < minCost) {
-                minCost = cost;
-                minCostNode = node;
-            }
-        }
-        return minCostNode;
+        return costs.entrySet().stream()
+                // ignoring already explored nodes.
+                .filter(node -> !explored.contains(node.getKey()))
+                // finding the min cost node. `value` corresponds to node cost.
+                .min(comparingByValue())
+                // returning node object or `null` if the min node was not found.
+                .map(node -> node.getKey()).orElse(null);
     }
 
     private static <T> List<T> buildPathToNode(T target, Map<T, T> parents) {

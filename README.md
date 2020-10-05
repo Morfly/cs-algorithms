@@ -11,7 +11,7 @@ An encyclopedia of computer science algorithms and data structures.
 ## Algorithms
 ...
 
-All the links refer to `Kotlin` implementations by default. If you prefer another language feel free to check the list of [available languages](#available-languages).
+By default all the links below refer to `Kotlin` algorithm implementations. If you prefer another language feel free to check the list of [available languages](#available-languages).
 
 `B` - Base, `A` - Advanced
 ### By category

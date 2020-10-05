@@ -55,7 +55,7 @@ private func findMinCostNode<T>(in costs: [T: Double], except explored: Set<T>) 
         .filter { node, cost in !explored.contains(node) }
         // finding the min cost node. `value` corresponds to node cost.
         .min { cost1, cost2 in cost1.value < cost2.value}?
-        // returning node object or `nil` if the node was not found.
+        // returning node object or `nil` if the min node was not found.
         .key
 }
 

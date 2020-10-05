@@ -7,7 +7,7 @@ func bfs<T>(in graph: Graph<T>, withRoot root: T) -> [T] {
     var searchQueue = [root]
     var queuePopIndex = 0
     
-    while searchQueue.count > queuePopIndex {
+    while queuePopIndex < searchQueue.count {
         let node = searchQueue[queuePopIndex]
         queuePopIndex += 1
         

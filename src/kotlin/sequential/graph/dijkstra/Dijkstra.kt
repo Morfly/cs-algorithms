@@ -16,7 +16,7 @@ private val INFINITY = Double.POSITIVE_INFINITY
 /**
  * Finds shortest path to the [target] node using Dijkstra algorithm.
  */
-fun <T> Graph<T>.dijkstra(root: T, target: T): Collection<T> {
+fun <T: Any> Graph<T>.dijkstra(root: T, target: T): Collection<T> {
     val graph = this
     require(root in graph) { "Invalid root." }
 
@@ -55,16 +55,12 @@ private fun <T> Map<T, Double>.findMinCostNode(explored: Collection<T>): T? =
 /**
  * Build path from root to target node.
  */
-private fun <T> buildPathToNode(target: T, parents: Map<T, T>): List<T> {
+private fun <T: Any> buildPathToNode(target: T, parents: Map<T, T>): List<T> {
     require(target in parents) { "Invalid target."}
 
-    val path = mutableListOf<T>()
-    var node: T? = target
-    while (node != null) {
-        path += node
-        node = parents[node]
-    }
-    return path.reversed()
+    return generateSequence(target) { node -> parents[node] }
+        .toList()
+        .asReversed()
 }
 
 
