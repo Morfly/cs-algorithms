@@ -1,15 +1,15 @@
 package sequential.graph.dijkstra
 
 
-/**
- * Weighted graph representation using hash table.
- * @param T graph value type.
- */
-private typealias Graph<T> = Map<T, Map<T, Double>>
+// Weighted graph map representation where `key` = source vertex, `value` = destination vertices with edge weights.
+private typealias Graph<T> = Map<T, Edges<T>>
+// Weighted edges to destination vertices.
+private typealias Edges<T> = Map<T, Weight>
+// Edge weight.
+private typealias Weight = Double
 
-/**
- * Infinity value which is used as graph edge weight.
- */
+
+// Infinity as a default vertex cost value.
 private val INFINITY = Double.POSITIVE_INFINITY
 
 
@@ -18,7 +18,7 @@ private val INFINITY = Double.POSITIVE_INFINITY
  */
 fun <T: Any> Graph<T>.dijkstra(root: T, target: T): Collection<T> {
     val graph = this
-    require(root in graph) { "Invalid root." }
+    require(root in graph) { "Invalid root vertex." }
 
     val costs = graph[root]!!.toMutableMap()
     val explored = mutableSetOf<T>()
@@ -43,7 +43,7 @@ fun <T: Any> Graph<T>.dijkstra(root: T, target: T): Collection<T> {
 }
 
 private fun <T> Map<T, Double>.findMinCostNode(explored: Collection<T>): T? = 
-    // turning costs to sequence to improve performance of further operations.
+    // turning costs to sequence for faster further operations.
     asSequence()
         // ignoring already explored nodes.
         .filter { (node, _) -> node !in explored } 
@@ -56,7 +56,7 @@ private fun <T> Map<T, Double>.findMinCostNode(explored: Collection<T>): T? =
  * Build path from root to target node.
  */
 private fun <T: Any> buildPathToNode(target: T, parents: Map<T, T>): List<T> {
-    require(target in parents) { "Invalid target."}
+    require(target in parents) { "Invalid target vertex."}
 
     return generateSequence(target) { node -> parents[node] }
         .toList()
@@ -65,7 +65,7 @@ private fun <T: Any> buildPathToNode(target: T, parents: Map<T, T>): List<T> {
 
 
 fun main() {
-    val graph: Graph<String> = mapOf(
+    val graph = mapOf(
         "Start" to mapOf("A" to 5.0),
         "A" to mapOf("B" to 7.0, "C" to 4.0),
         "B" to mapOf("Finish" to 4.0),

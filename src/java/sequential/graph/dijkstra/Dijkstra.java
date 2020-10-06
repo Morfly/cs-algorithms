@@ -12,11 +12,12 @@ import static java.util.Map.Entry.comparingByValue;
 
 class Dijkstra {
 
+    // Infinity as a default vertex cost value.
     private static final double INFINITY = Double.POSITIVE_INFINITY;
 
 
     public static <T> List<T> dijkstra(Map<T, Map<T, Double>> graph, T root, T target) {
-        if (!graph.containsKey(root)) throw new IllegalArgumentException("Invalid root.");
+        if (!graph.containsKey(root)) throw new IllegalArgumentException("Invalid root vertex.");
 
         var costs = new HashMap<>(graph.get(root));
         var explored = new HashSet<T>();
@@ -55,7 +56,7 @@ class Dijkstra {
     }
 
     private static <T> List<T> buildPathToNode(T target, Map<T, T> parents) {
-        if (!parents.containsKey(target)) throw new IllegalArgumentException("Invalid target.");
+        if (!parents.containsKey(target)) throw new IllegalArgumentException("Invalid target vertex.");
 
         var path = new LinkedList<T>();
         T node = target;

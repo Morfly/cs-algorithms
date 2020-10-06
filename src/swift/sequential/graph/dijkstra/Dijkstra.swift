@@ -1,8 +1,12 @@
-/// Weighted graph representation using dictionary.
-typealias Graph<T: Hashable> = [T: [T: Double]]
+/// Weighted graph dictionary representation where `key` = source vertex, `value` = destination vertices  edge weights.
+typealias Graph<T: Hashable> = [T: Edges<T>]
+/// Weighted edges to destination vertices.
+typealias Edges<T: Hashable> = [T: Weight]
+/// Edge weight.
+typealias Weight = Double
 
 
-/// Infinity as a default node cost value.
+/// Infinity as a default vertex cost value.
 let infinity = Double.infinity
 
 
@@ -71,11 +75,9 @@ private func findMinCostNode<T>(in costs: [T: Double], except explored: Set<T>) 
 private func buildPathTo<T>(_ target: T, with parents: [T: T]) -> [T]? {
     guard parents[target] != nil else { return nil }
     
-    var path = [T]()
-    var node: T? = target
-    while node != nil {
-        path.append(node!)
-        node = parents[node!]
+    var path = [target]
+    while let node = parents[path.last!] {
+        path.append(node)
     }
     return path.reversed()
 }

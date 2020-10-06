@@ -9,26 +9,28 @@ def dijkstra(graph, root, target):
     explored = set()
     parents = {node: root for node in graph[root]}
 
-    node = find_min_cost_node(costs, explored)
+    node = _find_min_cost_node(costs, explored)
     while node:
         explored.add(node)
         node_cost = costs[node]
 
         successors = graph.get(node, {})
-        for (succ, edge_cost) in successors.items():
-            if node_cost + edge_cost < (costs.get(succ) or infinity):
-                costs[succ] = node_cost + edge_cost
+        for (succ, edge_weight) in successors.items():
+            if node_cost + edge_weight < (costs.get(succ) or infinity):
+                costs[succ] = node_cost + edge_weight
                 parents[succ] = node
 
-        node = find_min_cost_node(costs, explored)
+        node = _find_min_cost_node(costs, explored)
 
-    return build_path_to_node(target, parents)
+    return _build_path_to_node(target, parents)
 
-def find_min_cost_node(costs, explored):
+def _find_min_cost_node(costs, explored):
+    # ignoring already explored nodes.
     costs = {node: cost for (node, cost) in costs.items() if node not in explored}
+    # returning the min cost node or `None` if not found. `costs.get` corresponds to node cost.
     return min(costs, key=costs.get, default=None)
 
-def build_path_to_node(target, parents):
+def _build_path_to_node(target, parents):
     if target not in parents:
         return None
 
