@@ -10,3 +10,9 @@ java_binary(
     main_class = "sequential.graph.bfs.BreadthFirstTraversalKt",
     runtime_deps = [":bfs_lib"],
 )
+
+java_binary(
+    name = "bfs_grid",
+    main_class = "sequential.graph.bfs.grid.GridBreadthFirstTraversalKt",
+    runtime_deps = [":bfs_lib"],
+)

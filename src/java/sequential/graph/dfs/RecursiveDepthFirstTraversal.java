@@ -7,34 +7,24 @@ import java.util.Map;
 import java.util.Set;
 
 
-class RecursiveDepthFirstTraversal<T> {
+class RecursiveDepthFirstTraversal {
 
-    private Map<T, List<T>> graph;
-    private Set<T> explored;
 
-    public synchronized Collection<T> dfs(Map<T, List<T>> graph, T root) {
-        this.graph = graph;
-        explored = new LinkedHashSet<>();
+    public static <T> Collection<T> dfs(Map<T, List<T>> graph, T root) { 
+        var explored = new LinkedHashSet<T>();       
 
-        var traversed = explore(root);
+        explore(root, graph, explored);
 
-        clear();
-        return traversed;
-    }
-
-    private Collection<T> explore(T node) {
-        explored.add(node);
-
-        var successors = graph.getOrDefault(node, List.of());
-        for (var succ : successors)
-            if (!explored.contains(succ)) explore(succ);
-        
         return explored;
     }
 
-    private void clear() {
-        explored = null;
-        graph = null;
+    private static <T> void explore(T node, Map<T, List<T>> graph, Set<T> explored) {
+        explored.add(node);
+
+        var successors = graph.getOrDefault(node, List.of());
+        for (var succ : successors) {
+            if (!explored.contains(succ)) explore(succ, graph, explored);
+        }
     }
 
 
@@ -47,7 +37,7 @@ class RecursiveDepthFirstTraversal<T> {
         );
 
         System.out.println(
-            new RecursiveDepthFirstTraversal().dfs(graph, "you")
+            dfs(graph, "you")
         );
     }
 }
