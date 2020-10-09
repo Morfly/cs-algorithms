@@ -74,6 +74,6 @@ fun main() {
     )
 
     println(
-        graph.bfs(0, 0)
+        graph.bfs(rootRow = 0, rootCol = 0)
     )
 }

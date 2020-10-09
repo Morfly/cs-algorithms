@@ -7,3 +7,11 @@ swift_binary(
         "main.swift",
     ],
 )
+
+swift_binary(
+    name = "bfs_grid",
+    srcs = [
+        "GridBreadthFirstTraversal.swift",
+        "main.swift",
+    ],
+)
